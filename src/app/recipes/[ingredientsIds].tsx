@@ -46,12 +46,14 @@ export default function Recipes() {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <Recipe
-            recipe={item} />
+            recipe={item}
+            onPress={() => router.navigate("/recipe/" + item.id)}
+          />
         )}
         style={styles.recipes}
         contentContainerStyle={styles.recipesContent}
         showsVerticalScrollIndicator={false}
-        columnWrapperStyle={{gap: 16}}
+        columnWrapperStyle={{ gap: 16 }}
         numColumns={2}
       />
     </View>
