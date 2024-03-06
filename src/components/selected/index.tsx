@@ -1,9 +1,11 @@
-import Animated, { SlideInDown, BounceOutDown } from 'react-native-reanimated'
-import { styles } from "./styles"
 import { View, Text } from "react-native"
-import { MaterialIcons } from '@expo/vector-icons'
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
+import Animated, { BounceOutDown, SlideInDown } from "react-native-reanimated"
 
-import { theme } from '@/theme'
+import { theme } from "@/theme"
+import { styles } from "./styles"
+
+import { Button } from "@/components/Button"
 
 type Props = {
   quantity: number
@@ -14,9 +16,9 @@ type Props = {
 export function Selected({ quantity, onClear, onSearch }: Props) {
   return (
     <Animated.View
-      style={styles.container}
       entering={SlideInDown.duration(500)}
       exiting={BounceOutDown}
+      style={styles.container}
     >
       <View style={styles.header}>
         <Text style={styles.label}>{quantity} ingredientes selecionados</Text>
@@ -29,6 +31,10 @@ export function Selected({ quantity, onClear, onSearch }: Props) {
         />
       </View>
 
+      <Button
+        title="Encontrar"
+        onPress={onSearch}
+      />
     </Animated.View>
   )
 }
