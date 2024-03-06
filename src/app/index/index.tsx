@@ -1,7 +1,8 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, Alert } from "react-native";
 import { styles } from "./style";
 import { Ingredient } from "@/components/ingredient";
 import { useState } from "react";
+import { Selected } from "@/components/selected";
 
 export default function Index() {
   const [selected, setSelected] = useState<string[]>([])
@@ -14,6 +15,21 @@ export default function Index() {
 
     setSelected((state) => [...state, value])
     console.log(selected)
+  }
+
+  function handleClearSelectIngredients() {
+    Alert.alert("Limpar", "Deseja limpar tudo?", [
+      {
+        text: "Não",
+        style: 'cancel'
+      },
+      {
+        text: 'Sim',
+        onPress: () => setSelected([])
+      }
+    ])
+
+
   }
 
   return (
@@ -41,6 +57,17 @@ export default function Index() {
           ))
         }
       </ScrollView>
+
+
+      {
+        selected.length > 0 && (
+          <Selected
+            quantity={selected.length}
+            onClear={handleClearSelectIngredients}
+            onSearch={() => { }}
+          />
+        )
+      }
     </View>
   )
 }
